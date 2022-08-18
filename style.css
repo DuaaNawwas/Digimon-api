@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff&display=swap");
+body {
+	font-family: "DynaPuff", cursive;
+}
+h2 {
+	font-size: 26px;
+}
+#card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 20px 10px;
+}
+#card-container > div {
+	box-shadow: 0 4px 8px 0 rgba(108, 98, 98, 0.686);
+	background-color: #42032c;
+	color: white;
+	transition: 0.3s;
+	margin: 5px;
+	padding-top: 20px;
+	padding-bottom: 50px;
+	border-radius: 15px;
+	text-align: center;
+	width: 100%;
+	max-width: 350px;
+}
+#card-container > div:hover {
+	box-shadow: 0 8px 16px 0 rgba(177, 126, 126, 0.593);
+}
+img {
+	margin-bottom: 30px;
+	border-radius: 5%;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
+	/* width: 50%; */
+}
+#card-container h2 {
+	text-transform: uppercase;
+}
+#card-container > div > div {
+	padding: 10px 16px;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
