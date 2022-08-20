@@ -15,6 +15,10 @@ h2 {
 	margin: 0 auto;
 	padding: 20px 10px;
 }
+#card-container > h2 {
+	margin: 50px;
+	text-align: center;
+}
 #card-container > div {
 	box-shadow: 0 4px 8px 0 rgba(108, 98, 98, 0.686);
 	background-color: #42032c;

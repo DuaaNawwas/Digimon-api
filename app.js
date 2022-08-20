@@ -39,3 +39,33 @@ function render(digimonArr) {
 	p.textContent = "Level: " + digimonArr.level;
 	cardText.append(p);
 }
+
+// Search ----
+
+const searchButton = document.getElementById("search-button");
+const searchInput = document.getElementById("search-input");
+
+searchButton.addEventListener("click", function (e) {
+	e.preventDefault();
+	const digiName = searchInput.value;
+	console.log(digiName);
+	// const digiLevel = searchInput.value;
+	if (digiName) {
+		fetch("https://digimon-api.vercel.app/api/digimon/name/" + digiName)
+			.then((res) => res.json())
+			.then((newData) => {
+				console.log(newData);
+				if (newData.length > 0) {
+					newData.forEach((one) => {
+						let newDigi = new Digimon(one.img, one.level, one.name);
+						cardContainer.innerHTML = "";
+						render(newDigi);
+					});
+				} else {
+					cardContainer.innerHTML = `<h2>This Digimon does not exist. <br> Try Again </h2>`;
+				}
+			});
+
+		searchInput.value = "";
+	}
+});

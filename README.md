@@ -9,3 +9,7 @@
 18/8/2022
 
 I added cards from an api to the page.
+
+20/8/2022
+
+I added search functionality.
