@@ -45,27 +45,80 @@ function render(digimonArr) {
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 
+const API = "https://digimon-api.vercel.app/api/digimon/";
+
+const levels = [
+	"champion",
+	"ultimate",
+	"mega",
+	"rookie",
+	"in training",
+	"armor",
+	"fresh",
+];
+console.log(levels.map((x) => console.log(x)));
+let levelDigis = [];
 searchButton.addEventListener("click", function (e) {
 	e.preventDefault();
-	const digiName = searchInput.value;
-	console.log(digiName);
-	// const digiLevel = searchInput.value;
-	if (digiName) {
-		fetch("https://digimon-api.vercel.app/api/digimon/name/" + digiName)
-			.then((res) => res.json())
-			.then((newData) => {
-				console.log(newData);
-				if (newData.length > 0) {
-					newData.forEach((one) => {
-						let newDigi = new Digimon(one.img, one.level, one.name);
-						cardContainer.innerHTML = "";
-						render(newDigi);
-					});
-				} else {
-					cardContainer.innerHTML = `<h2>This Digimon does not exist. <br> Try Again </h2>`;
-				}
-			});
+	let digiValue = searchInput.value;
+	const x = ["name", "level"];
 
+	// console.log(digiName);
+	// const digiLevel = searchInput.value;
+	if (digiValue) {
+		if (levels.includes(digiValue)) {
+			digiValue = digiValue.replace(" ", "");
+			fetch(API + "level/" + digiValue)
+				.then((res) => res.json())
+				.then((newData) => {
+					console.log(newData);
+					if (newData.length > 0) {
+						newData.forEach((one) => {
+							let newDigi = new Digimon(one.img, one.level, one.name);
+							cardContainer.innerHTML = "";
+
+							levelDigis.push(newDigi);
+						});
+						levelDigis.map(render);
+					} else {
+						cardContainer.innerHTML = `<h2>This Digimon does not exist. <br> Try Again </h2>`;
+					}
+				});
+		} else {
+			fetch(API + "name/" + digiValue)
+				.then((res) => res.json())
+				.then((newData) => {
+					console.log(newData);
+					if (newData.length > 0) {
+						newData.forEach((one) => {
+							let newDigi = new Digimon(one.img, one.level, one.name);
+							cardContainer.innerHTML = "";
+
+							render(newDigi);
+						});
+					} else {
+						cardContainer.innerHTML = `<h2>This Digimon does not exist. <br> Try Again </h2>`;
+					}
+				});
+		}
 		searchInput.value = "";
 	}
 });
+
+// let levelDigis = [];
+// fetch("https://digimon-api.vercel.app/api/digimon/level/" + digiLevel)
+// 	.then((res) => res.json())
+// 	.then((newData2) => {
+// 		console.log(newData2);
+// 		if (newData2.length > 0) {
+// 			newData2.forEach((one2) => {
+// 				let newDigi = new Digimon(one2.image, one2.level, one2.name);
+// 				console.log(newDigi);
+// 				levelDigis.push(newDigi);
+// 				cardContainer.innerHTML = "";
+// 			});
+// 			levelDigis.map(render);
+// 		} else {
+// 			cardContainer.innerHTML = `<h2>This Digimon does not exist. <br> Try Again </h2>`;
+// 		}
+// 	});
